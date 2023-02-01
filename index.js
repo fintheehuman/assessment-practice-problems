@@ -28,7 +28,13 @@ const exampleCities = require("./cities");
       "Philadelphia",
     ];
  */
-function getAllCityNames() {}
+function getAllCityNames(cities) {
+  let array = []
+
+  for (let city of cities) {
+    array.push(city.name)
+  } return array
+}
 
 /**
  * getOldestCity()
@@ -41,8 +47,14 @@ function getAllCityNames() {}
  *  getOldestCity(cities);
  *  //> "Mexico City"
  */
-function getOldestCity() {}
-
+function getOldestCity(cities) {
+  if (cities) {
+    for (let city of cities) {
+      return city.name
+    }
+  } return null
+}
+//This one didn't make much sense to me. The instructions left me confused, although it may generally be my understanding. I also wasn't quite sure why the two test arrays (cities, and alternative) made the oldest in both the 1st positions. Maybe this was by design...
 /**
  * findByName()
  * -----------------------------
@@ -65,7 +77,13 @@ function getOldestCity() {}
         id: 't870ol'
     }
  */
-function findByName() {}
+function findByName(cities, name) {
+  for (let city of cities) {
+    if (city.name === name) {
+      return city
+    }
+  } return null
+}
 
 /**
  * filterByCountry()
@@ -87,7 +105,15 @@ function findByName() {}
     ]
     function filterByCountry() {}
 */
-function filterByCountry() {}
+function filterByCountry(cities, country) { 
+  let array = []
+
+  for (let city of cities) {
+    if (city.country.toLowerCase() === country.toLowerCase()) {
+      array.push(city)
+    } 
+  } return array
+}
 
 /**
  * findBySportsTeam()
@@ -101,7 +127,13 @@ function filterByCountry() {}
  *  findBySportsTeam(cities, "Cubs")
  *  //> "Chicago"
  */
-function findBySportsTeam() {}
+function findBySportsTeam(cities, teamName) {
+  for (let city of cities) {
+    if (city.sportsTeams.includes(teamName)) {
+      return city.name
+    }
+  } return null
+}
 
 /**
  * countByCountry()
@@ -119,7 +151,15 @@ function findBySportsTeam() {}
  *        "Cuba": 1
  *      }
  */
-function countByCountry() {}
+function countByCountry(cities) {
+  let object = {} 
+
+  for (let city of cities) {
+    if (!object[city.country]) {
+      object[city.country] = 0
+    } object[city.country] += 1
+  } return object
+}
 
 /**
  * getAverageFoundingYearForCapitals()
@@ -132,8 +172,22 @@ function countByCountry() {}
  *  getAverageFoundingYearForCapitals(cities);
  *  //> 1531
  */
-function getAverageFoundingYearForCapitals() {}
+function getAverageFoundingYearForCapitals(cities) {
+  let total = 0
+  let count = 0
 
+  if (cities.length === 0) {
+    return 0
+  } 
+  for (let city of cities) {
+    if (city.nationalCapital || city.stateOrProvinceCapital) {
+      total += city.yearFounded
+      count += 1
+    } 
+  } 
+  let average = Math.round(total/count)
+    return average
+}
 /**
  * getAllCitiesFoundedBeforeYear()
  * -----------------------------
@@ -153,7 +207,15 @@ function getAverageFoundingYearForCapitals() {}
       },
     ];
  */
-function getAllCitiesFoundedBeforeYear() {}
+function getAllCitiesFoundedBeforeYear(cities, year) {
+  let array = []
+
+  for (let city of cities) {
+    if(city.yearFounded <  year) {
+      array.push(city)
+    } 
+  } return array
+}
 
 // Do not change anything below this line.
 module.exports = {
